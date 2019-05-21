@@ -1,0 +1,324 @@
+
+
+// Spacing
+//
+// Control the default styling of most Bootstrap elements by modifying these
+// variables. Mostly focused on spacing.
+// You can add more entries to the $spacers map, should you need more variation.
+
+// stylelint-disable
+$spacer: 1rem !default;
+$spacers: () !default;
+$spacers: map-merge((
+  0: 0,
+  1: ($spacer * .25),
+  2: ($spacer * .5),
+  3: $spacer,
+  4: ($spacer * 1.5),
+  5: ($spacer * 3)
+), $spacers);
+
+// This variable affects the `.h-*` and `.w-*` classes.
+$sizes: () !default;
+$sizes: map-merge((
+  25: 25%,
+  50: 50%,
+  75: 75%,
+  100: 100%,
+  auto: auto
+), $sizes);
+
+// Grid breakpoints
+//
+// Define the minimum dimensions at which your layout will change,
+// adapting to different screen sizes, for use in media queries.
+
+$grid-breakpoints: (
+  xxs: 0,
+  xs: 400,
+  sm: 600px,
+  md: 960px,
+  lg: 1280px,
+  xl: 1920px
+) !default;
+
+// Grid containers
+//
+// Define the maximum width of `.container` for different screen sizes.
+
+$container-max-widths: (
+  xs: 420px,
+  sm: 640px,
+  md: 1000px,
+  lg: 1320px,
+  xl: 2048px
+) !default;
+
+@import "bootstrap";
+
+
+
+// stylelint-disable declaration-no-important
+
+// Flex variation
+//
+// Custom styles for additional flex alignment options.
+
+@each $breakpoint in map-keys($grid-breakpoints) {
+  @include media-breakpoint-up($breakpoint) {
+    $infix: breakpoint-infix($breakpoint, $grid-breakpoints);
+
+    .flex#{$infix}-row            { flex-direction: row !important; }
+    .flex#{$infix}-column         { flex-direction: column !important; }
+    .flex#{$infix}-row-reverse    { flex-direction: row-reverse !important; }
+    .flex#{$infix}-column-reverse { flex-direction: column-reverse !important; }
+
+    .flex#{$infix}-wrap         { flex-wrap: wrap !important; }
+    .flex#{$infix}-nowrap       { flex-wrap: nowrap !important; }
+    .flex#{$infix}-wrap-reverse { flex-wrap: wrap-reverse !important; }
+    .flex#{$infix}-fill         { flex: 1 1 auto !important; }
+    .flex#{$infix}-grow-0       { flex-grow: 0 !important; }
+    .flex#{$infix}-grow-1       { flex-grow: 1 !important; }
+    .flex#{$infix}-shrink-0     { flex-shrink: 0 !important; }
+    .flex#{$infix}-shrink-1     { flex-shrink: 1 !important; }
+
+    .justify-content#{$infix}-start   { justify-content: flex-start !important; }
+    .justify-content#{$infix}-end     { justify-content: flex-end !important; }
+    .justify-content#{$infix}-center  { justify-content: center !important; }
+    .justify-content#{$infix}-between { justify-content: space-between !important; }
+    .justify-content#{$infix}-around  { justify-content: space-around !important; }
+
+    .align-items#{$infix}-start    { align-items: flex-start !important; }
+    .align-items#{$infix}-end      { align-items: flex-end !important; }
+    .align-items#{$infix}-center   { align-items: center !important; }
+    .align-items#{$infix}-baseline { align-items: baseline !important; }
+    .align-items#{$infix}-stretch  { align-items: stretch !important; }
+
+    .align-content#{$infix}-start   { align-content: flex-start !important; }
+    .align-content#{$infix}-end     { align-content: flex-end !important; }
+    .align-content#{$infix}-center  { align-content: center !important; }
+    .align-content#{$infix}-between { align-content: space-between !important; }
+    .align-content#{$infix}-around  { align-content: space-around !important; }
+    .align-content#{$infix}-stretch { align-content: stretch !important; }
+
+    .align-self#{$infix}-auto     { align-self: auto !important; }
+    .align-self#{$infix}-start    { align-self: flex-start !important; }
+    .align-self#{$infix}-end      { align-self: flex-end !important; }
+    .align-self#{$infix}-center   { align-self: center !important; }
+    .align-self#{$infix}-baseline { align-self: baseline !important; }
+    .align-self#{$infix}-stretch  { align-self: stretch !important; }
+  }
+}
+
+// stylelint-disable declaration-no-important
+
+//
+// Utilities for common `display` values
+//
+
+@each $breakpoint in map-keys($grid-breakpoints) {
+  @include media-breakpoint-up($breakpoint) {
+    $infix: breakpoint-infix($breakpoint, $grid-breakpoints);
+
+    .d#{$infix}-none         { display: none !important; }
+    .d#{$infix}-inline       { display: inline !important; }
+    .d#{$infix}-inline-block { display: inline-block !important; }
+    .d#{$infix}-block        { display: block !important; }
+    .d#{$infix}-table        { display: table !important; }
+    .d#{$infix}-table-row    { display: table-row !important; }
+    .d#{$infix}-table-cell   { display: table-cell !important; }
+    .d#{$infix}-flex         { display: flex !important; }
+    .d#{$infix}-inline-flex  { display: inline-flex !important; }
+  }
+}
+
+
+
+// stylelint-disable declaration-no-important
+
+// Width and height
+
+@each $breakpoint in map-keys($grid-breakpoints) {
+  @include media-breakpoint-up($breakpoint) {
+    $infix: breakpoint-infix($breakpoint, $grid-breakpoints);
+
+    @each $prop, $abbrev in (width: w, height: h) {
+      @each $size, $length in $sizes {
+        .#{$abbrev}#{$infix}-#{$size} { #{$prop}: $length !important; }
+      }
+    }
+
+  }
+}
+.mw-100 { max-width: 100% !important; }
+.mh-100 { max-height: 100% !important; }
+
+
+// stylelint-disable declaration-no-important
+
+// Margin and Padding
+
+@each $breakpoint in map-keys($grid-breakpoints) {
+  @include media-breakpoint-up($breakpoint) {
+    $infix: breakpoint-infix($breakpoint, $grid-breakpoints);
+
+    @each $prop, $abbrev in (margin: m, padding: p) {
+      @each $size, $length in $spacers {
+
+        .#{$abbrev}#{$infix}-#{$size} { #{$prop}: $length !important; }
+        .#{$abbrev}t#{$infix}-#{$size},
+        .#{$abbrev}y#{$infix}-#{$size} {
+          #{$prop}-top: $length !important;
+        }
+        .#{$abbrev}r#{$infix}-#{$size},
+        .#{$abbrev}x#{$infix}-#{$size} {
+          #{$prop}-right: $length !important;
+        }
+        .#{$abbrev}b#{$infix}-#{$size},
+        .#{$abbrev}y#{$infix}-#{$size} {
+          #{$prop}-bottom: $length !important;
+        }
+        .#{$abbrev}l#{$infix}-#{$size},
+        .#{$abbrev}x#{$infix}-#{$size} {
+          #{$prop}-left: $length !important;
+        }
+      }
+    }
+
+    // Some special margin utils
+    .m#{$infix}-auto { margin: auto !important; }
+    .mt#{$infix}-auto,
+    .my#{$infix}-auto {
+      margin-top: auto !important;
+    }
+    .mr#{$infix}-auto,
+    .mx#{$infix}-auto {
+      margin-right: auto !important;
+    }
+    .mb#{$infix}-auto,
+    .my#{$infix}-auto {
+      margin-bottom: auto !important;
+    }
+    .ml#{$infix}-auto,
+    .mx#{$infix}-auto {
+      margin-left: auto !important;
+    }
+  }
+}
+
+
+// stylelint-disable declaration-no-important
+
+//
+// Text
+//
+
+.text-monospace { font-family: $font-family-monospace; }
+
+// Alignment
+
+.text-justify  { text-align: justify !important; }
+.text-nowrap   { white-space: nowrap !important; }
+.text-truncate { @include text-truncate; }
+
+// Responsive alignment
+
+@each $breakpoint in map-keys($grid-breakpoints) {
+  @include media-breakpoint-up($breakpoint) {
+    $infix: breakpoint-infix($breakpoint, $grid-breakpoints);
+
+    .text#{$infix}-left   { text-align: left !important; }
+    .text#{$infix}-right  { text-align: right !important; }
+    .text#{$infix}-center { text-align: center !important; }
+  }
+}
+
+// Transformation
+
+.text-lowercase  { text-transform: lowercase !important; }
+.text-uppercase  { text-transform: uppercase !important; }
+.text-capitalize { text-transform: capitalize !important; }
+
+// Weight and italics
+
+.font-weight-light  { font-weight: $font-weight-light !important; }
+.font-weight-normal { font-weight: $font-weight-normal !important; }
+.font-weight-bold   { font-weight: $font-weight-bold !important; }
+.font-italic        { font-style: italic !important; }
+
+// Contextual colors
+
+.text-white { color: $white !important; }
+
+// @each $color, $value in $theme-colors {
+//   @include text-emphasis-variant(".text-#{$color}", $value);
+// }
+
+.text-body { color: $body-color !important; }
+.text-muted { color: $text-muted !important; }
+
+.text-black-50 { color: rgba($black, .5) !important; }
+.text-white-50 { color: rgba($white, .5) !important; }
+
+// Misc
+
+.text-hide {
+  @include text-hide($ignore-warning: true);
+}
+
+
+
+
+// grid
+// Container widths
+//
+// Set the container width, and override it for fixed navbars in media queries.
+
+@if $enable-grid-classes {
+  .container {
+    @include make-container();
+    @include make-container-max-widths();
+  }
+}
+
+// Fluid container
+//
+// Utilizes the mixin meant for fixed width containers, but with 100% width for
+// fluid, full width layouts.
+
+@if $enable-grid-classes {
+  .container-fluid {
+    @include make-container();
+  }
+}
+
+// Row
+//
+// Rows contain and clear the floats of your columns.
+
+@if $enable-grid-classes {
+  .row {
+    @include make-row();
+  }
+
+  // Remove the negative margin from default .row, then the horizontal padding
+  // from all immediate children columns (to prevent runaway style inheritance).
+  .no-gutters {
+    margin-right: 0;
+    margin-left: 0;
+
+    > .col,
+    > [class*="col-"] {
+      padding-right: 0;
+      padding-left: 0;
+    }
+  }
+}
+
+// Columns
+//
+// Common styles for small and large grid columns
+
+@if $enable-grid-classes {
+  @include make-grid-columns();
+}
